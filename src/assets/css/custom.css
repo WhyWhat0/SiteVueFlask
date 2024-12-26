@@ -1,0 +1,52 @@
+.dialog {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    display: flex;
+  }
+  
+  body::-webkit-scrollbar {
+    width: 8px;               /* ширина scrollbar */
+  }
+  body::-webkit-scrollbar-track {
+    background: gray;        /* цвет дорожки */
+  }
+  body::-webkit-scrollbar-thumb {
+    background-color: teal;    /* цвет плашки */
+    border-radius: 20px;       /* закругления плашки */
+    border: 3px solid lightgray;  /* padding вокруг плашки */
+  }
+    
+  
+.circle {
+  width: 46px; /* задаете свои размеры */
+  height: 46px;
+  border-radius: 50%; /* не забываем о кроссбраузерности */
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -khtml-border-radius: 50%;
+  }
+  
+  
+  
+  .textformat{
+    white-space: pre-line;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+
+.large-font{
+  font-size: small
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+  

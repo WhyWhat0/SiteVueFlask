@@ -79,15 +79,15 @@ export default createStore({
   actions: {
     async getPostAnswersList({commit, state}) {
       await axios.get('http://localhost:5000/bot')
-          .then((res) => {
-            commit('setMessagesBot', res.data.answersList)
-            console.log(state.messagesBot)
+          .then(async (response) => {
+            //myList = [...response.data.answersList, ...response.data.messagesList];
+              commit('setMessagesBot', response.data.answersList.concat(response.data.messagesList).sort((a, b) => a.id - b.id))
           })
           .catch((error) => {
               // eslint-выключение следующей строки
               console.error(error);
           });
-  },
+    }
   },
   modules: {
     post: postModule

@@ -1,7 +1,7 @@
 <template>
     <div :class="{
-        'message-mine': message.isMyMessage,
-        'message-bot': !message.isMyMessage
+        'message-mine': message.isMyMessage == 1,
+        'message-bot': message.isMyMessage == 0
     }">
         <div class="message-body" id="block">
             <div

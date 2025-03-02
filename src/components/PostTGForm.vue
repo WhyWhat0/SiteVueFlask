@@ -1,4 +1,3 @@
-
 <template>
     <div v-if="show" @click="hideDialog">
         <div @click.stop class="chat">
@@ -22,10 +21,13 @@
             </div>
 
             <PostMessages
+                ref="chatBody"
                 :messagesBot="messagesBot"
                 :messagesHuman="messagesHuman">
             </PostMessages>
-            <PostCreateForm></PostCreateForm>
+            <PostCreateForm
+                @scrollToBottom="handleScrollToBottom">
+            </PostCreateForm>
         </div>
     </div>
 </template>
@@ -78,7 +80,11 @@ export default {
         hideDialog() {
             this.$emit('update:show', false)
         },
-
+        handleScrollToBottom() {
+            this.$refs.chatBody.scrollToBottom();
+            const chatBody = this.$refs.chatBody;
+            chatBody.scrollTop = chatBody.scrollHeight;
+        },
         myDate() {
             const today = new Date();
             const yyyy = today.getFullYear();
@@ -94,7 +100,6 @@ export default {
 
     },
     mounted() {
-        //this.getPostAnswersList()
     }
 }
 </script>

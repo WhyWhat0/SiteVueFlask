@@ -1,5 +1,5 @@
 <template>
-    <div class="chat-body" :style="{ height: this.$store.state.chatBodyHeight + '%' }">
+    <div ref="scrollContainer" class="chat-body" :style="{ height: this.$store.state.chatBodyHeight + '%' }">
         <div class="messages">
             <transition-group name="user-list" v-if="$store.state.messangerMode.bot">
                 <MyMessage
@@ -38,7 +38,13 @@ export default {
             required: true,
         }
     },
-    components: { MyMessage }
+    components: { MyMessage },
+    methods: {
+        scrollToBottom() {
+            const chatBody = this.$refs.scrollContainer;
+            chatBody.scrollTop = chatBody.scrollHeight;
+        },
+    }
 }
 </script>
 <style>

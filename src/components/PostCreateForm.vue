@@ -81,15 +81,9 @@ export default {
             await axios.post(this.path, this.message)
             this.$store.commit('setMessagesCount', this.messagesCount + 1)
             // const answer = this.getPostMessage((this.messagesBot.length + 1) / 2 - 1)
-            this.msg = await this.getPostMessage(this.messagesCount - 1)
-            await this.pushMessage({
-                id: Date.now(),
-                date: this.$store.getters.myTime,
-                text: this.msg,
-                isMyMessage: false,
-                files: ''
-            })
-            console.log(this.msg, (this.messagesCount - 1))
+            this.msg = await this.getPostMessage((this.messagesBot.length + 1) / 2 - 1)
+            await this.pushMessage(this.msg)
+            this.$emit('scrollToBottom')
             this.message = {
                 id: '',
                 text: '',
@@ -110,6 +104,7 @@ export default {
             }
 
         },
+
         async getPostMessage(id = 0) {
             await axios.get(this.path)
                 .then((res) => {
@@ -169,51 +164,52 @@ export default {
     }
 }
 </script>
-<style scoped>  .fa {
-      font-size: small;
-  }
+<style scoped>
+.fa {
+    font-size: small;
+}
 
-  .grow-wrap {
-      /* easy way to plop the elements on top of each other and have them both sized based on the tallest one's height */
-      display: grid;
-  }
+.grow-wrap {
+    /* easy way to plop the elements on top of each other and have them both sized based on the tallest one's height */
+    display: grid;
+}
 
-  .grow-wrap::after {
-      /* Note the weird space! Needed to preventy jumpy behavior */
-      content: attr(data-replicated-value) " ";
+.grow-wrap::after {
+    /* Note the weird space! Needed to preventy jumpy behavior */
+    content: attr(data-replicated-value) " ";
 
-      /* This is how textarea text behaves */
-      white-space: pre-wrap;
+    /* This is how textarea text behaves */
+    white-space: pre-wrap;
 
-      /* Hidden from view, clicks, and screen readers */
-      visibility: hidden;
-  }
+    /* Hidden from view, clicks, and screen readers */
+    visibility: hidden;
+}
 
-  .grow-wrap>textarea {
-      /* You could leave this, but after a user resizes, then it ruins the auto sizing */
-      resize: none;
+.grow-wrap>textarea {
+    /* You could leave this, but after a user resizes, then it ruins the auto sizing */
+    resize: none;
 
-      /* Firefox shows scrollbar on growth, you can hide like this. */
-      /* overflow: hidden; */
-  }
+    /* Firefox shows scrollbar on growth, you can hide like this. */
+    /* overflow: hidden; */
+}
 
-  .grow-wrap>textarea,
-  .grow-wrap::after {
-      /* Identical styling required!! */
-      /* border: 1px solid black; */
-      padding: 0.5rem;
-      font: inherit;
+.grow-wrap>textarea,
+.grow-wrap::after {
+    /* Identical styling required!! */
+    /* border: 1px solid black; */
+    padding: 0.5rem;
+    font: inherit;
 
-      /* Place on top of each other */
-      grid-area: 1 / 1 / 2 / 2;
-  }
+    /* Place on top of each other */
+    grid-area: 1 / 1 / 2 / 2;
+}
 
-  /* body {
+/* body {
       margin: 2rem;
       font: 1rem/1.4 system-ui, sans-serif;
   } */
 
-  label {
-      display: block;
-  }
+label {
+    display: block;
+}
 </style>

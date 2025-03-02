@@ -27,6 +27,8 @@
 <script>
 import MyButton from './UI/MyButton.vue';
 import PostTGForm from "@/components/PostTGForm"
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex"
+
 
 export default {
   data() {
@@ -35,6 +37,9 @@ export default {
   },
   components: { MyButton, PostTGForm },
   methods: {
+    ...mapActions({
+      getPostAnswersList: 'getPostAnswersList'
+    }),
     scrollToTop() {
       window.scrollTo(0, 0);
     },
